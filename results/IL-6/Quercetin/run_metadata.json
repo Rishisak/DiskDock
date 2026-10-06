@@ -1,0 +1,18 @@
+{
+  "protein_name": "IL-6",
+  "compound_name": "Quercetin",
+  "protein_pdb": "C:\\Users\\rishi\\OneDrive\\Desktop\\DistDockNet\\protein\\cache\\1P9M.pdb",
+  "requested_chain_id": "A",
+  "selected_chain_id": "A",
+  "site_mode": "blind",
+  "box": {
+    "center_x": -86.27249908447266,
+    "center_y": 182.093505859375,
+    "center_z": 50.74100112915039,
+    "size_x": 78.65699768066406,
+    "size_y": 114.44099426269531,
+    "size_z": 45.53600311279297
+  },
+  "binding_affinity": -7.858,
+  "vina_seed": 42
+}

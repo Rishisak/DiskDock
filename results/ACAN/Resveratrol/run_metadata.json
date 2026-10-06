@@ -1,0 +1,18 @@
+{
+  "protein_name": "ACAN",
+  "compound_name": "Resveratrol",
+  "protein_pdb": "C:\\Users\\rishi\\OneDrive\\Desktop\\DistDockNet\\protein\\cache\\9DFF.pdb",
+  "requested_chain_id": "A",
+  "selected_chain_id": "A",
+  "site_mode": "blind",
+  "box": {
+    "center_x": 23.538000106811523,
+    "center_y": -1.3245010375976562,
+    "center_z": 5.503999710083008,
+    "size_x": 63.45399856567383,
+    "size_y": 82.72100067138672,
+    "size_z": 54.08399963378906
+  },
+  "binding_affinity": -7.787,
+  "vina_seed": 42
+}

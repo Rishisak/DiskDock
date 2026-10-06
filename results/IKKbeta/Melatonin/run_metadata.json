@@ -1,0 +1,18 @@
+{
+  "protein_name": "IKKbeta",
+  "compound_name": "Melatonin",
+  "protein_pdb": "C:\\Users\\rishi\\OneDrive\\Desktop\\DistDockNet\\protein\\cache\\4KIK.pdb",
+  "requested_chain_id": "A",
+  "selected_chain_id": "A",
+  "site_mode": "blind",
+  "box": {
+    "center_x": 55.28750038146973,
+    "center_y": 15.9714994430542,
+    "center_z": -99.77300453186035,
+    "size_x": 63.867000579833984,
+    "size_y": 89.45099830627441,
+    "size_z": 142.53800582885742
+  },
+  "binding_affinity": -6.747,
+  "vina_seed": 42
+}

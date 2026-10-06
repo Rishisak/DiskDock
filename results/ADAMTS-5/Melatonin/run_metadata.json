@@ -1,0 +1,18 @@
+{
+  "protein_name": "ADAMTS-5",
+  "compound_name": "Melatonin",
+  "protein_pdb": "C:\\Users\\rishi\\OneDrive\\Desktop\\DistDockNet\\protein\\cache\\6YJM.pdb",
+  "requested_chain_id": "A",
+  "selected_chain_id": "A",
+  "site_mode": "blind",
+  "box": {
+    "center_x": 15.85200023651123,
+    "center_y": 4.027500152587891,
+    "center_z": 0.5879993438720703,
+    "size_x": 56.22400093078613,
+    "size_y": 60.7869987487793,
+    "size_z": 51.07600021362305
+  },
+  "binding_affinity": -7.786,
+  "vina_seed": 42
+}

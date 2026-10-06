@@ -1,0 +1,18 @@
+{
+  "protein_name": "MD-2",
+  "compound_name": "Melatonin",
+  "protein_pdb": "C:\\Users\\rishi\\OneDrive\\Desktop\\DistDockNet\\protein\\cache\\2E59.pdb",
+  "requested_chain_id": "A",
+  "selected_chain_id": "A",
+  "site_mode": "blind",
+  "box": {
+    "center_x": 2.0794992446899414,
+    "center_y": 20.881999969482422,
+    "center_z": 13.646500587463379,
+    "size_x": 54.072998046875,
+    "size_y": 54.44000244140625,
+    "size_z": 44.87900161743164
+  },
+  "binding_affinity": -6.675,
+  "vina_seed": 42
+}

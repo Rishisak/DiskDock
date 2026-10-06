@@ -1,0 +1,18 @@
+{
+  "protein_name": "HIF-1alpha",
+  "compound_name": "Resveratrol",
+  "protein_pdb": "C:\\Users\\rishi\\OneDrive\\Desktop\\DistDockNet\\protein\\cache\\4ZPR.pdb",
+  "requested_chain_id": "A",
+  "selected_chain_id": "A",
+  "site_mode": "blind",
+  "box": {
+    "center_x": -96.9324951171875,
+    "center_y": -45.821998596191406,
+    "center_z": 2.9749984741210938,
+    "size_x": 79.38299560546875,
+    "size_y": 81.41000366210938,
+    "size_z": 101.16600036621094
+  },
+  "binding_affinity": -7.151,
+  "vina_seed": 42
+}

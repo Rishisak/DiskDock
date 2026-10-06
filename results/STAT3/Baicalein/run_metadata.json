@@ -1,0 +1,18 @@
+{
+  "protein_name": "STAT3",
+  "compound_name": "Baicalein",
+  "protein_pdb": "C:\\Users\\rishi\\OneDrive\\Desktop\\DistDockNet\\protein\\cache\\6NJS.pdb",
+  "requested_chain_id": "A",
+  "selected_chain_id": "A",
+  "site_mode": "blind",
+  "box": {
+    "center_x": -3.3729991912841797,
+    "center_y": 18.83249855041504,
+    "center_z": 25.64750099182129,
+    "size_x": 84.5880012512207,
+    "size_y": 123.37299728393555,
+    "size_z": 97.39300155639648
+  },
+  "binding_affinity": -7.3,
+  "vina_seed": 42
+}

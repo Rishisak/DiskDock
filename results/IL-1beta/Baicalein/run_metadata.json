@@ -1,0 +1,18 @@
+{
+  "protein_name": "IL-1beta",
+  "compound_name": "Baicalein",
+  "protein_pdb": "C:\\Users\\rishi\\OneDrive\\Desktop\\DistDockNet\\protein\\cache\\8C3U.pdb",
+  "requested_chain_id": "A",
+  "selected_chain_id": "A",
+  "site_mode": "blind",
+  "box": {
+    "center_x": -16.88599967956543,
+    "center_y": -9.858999252319336,
+    "center_z": -60.571502685546875,
+    "size_x": 53.7599983215332,
+    "size_y": 50.77799987792969,
+    "size_z": 54.10100173950195
+  },
+  "binding_affinity": -7.512,
+  "vina_seed": 42
+}

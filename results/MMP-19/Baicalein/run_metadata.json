@@ -1,0 +1,18 @@
+{
+  "protein_name": "MMP-19",
+  "compound_name": "Baicalein",
+  "protein_pdb": "C:\\Users\\rishi\\OneDrive\\Desktop\\DistDockNet\\protein\\cache\\AF-Q99542-F1.pdb",
+  "requested_chain_id": "A",
+  "selected_chain_id": "A",
+  "site_mode": "blind",
+  "box": {
+    "center_x": -7.3125,
+    "center_y": -12.182499885559082,
+    "center_z": -12.831501007080078,
+    "size_x": 83.27899932861328,
+    "size_y": 90.927001953125,
+    "size_z": 170.0050048828125
+  },
+  "binding_affinity": -7.887,
+  "vina_seed": 42
+}

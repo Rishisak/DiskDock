@@ -1,0 +1,18 @@
+{
+  "protein_name": "MMP-7",
+  "compound_name": "Quercetin",
+  "protein_pdb": "C:\\Users\\rishi\\OneDrive\\Desktop\\DistDockNet\\protein\\cache\\7WXX.pdb",
+  "requested_chain_id": "A",
+  "selected_chain_id": "A",
+  "site_mode": "blind",
+  "box": {
+    "center_x": -28.2864990234375,
+    "center_y": -14.816999435424805,
+    "center_z": 1.2729997634887695,
+    "size_x": 47.98699951171875,
+    "size_y": 54.75600051879883,
+    "size_z": 47.00599670410156
+  },
+  "binding_affinity": -7.535,
+  "vina_seed": 42
+}

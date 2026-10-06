@@ -1,0 +1,14 @@
+receptor = C:\Users\rishi\OneDrive\Desktop\DistDockNet\results\ui_runs\JAK2\Resveratrol\receptor.pdbqt
+ligand = C:\Users\rishi\OneDrive\Desktop\DistDockNet\results\ui_runs\JAK2\Resveratrol\ligand.pdbqt
+
+center_x = -14.5964994430542
+center_y = -8.848999977111816
+center_z = -11.124000072479248
+
+size_x = 24.42099952697754
+size_y = 23.802000045776367
+size_z = 20.661999702453613
+
+exhaustiveness = 16
+num_modes = 10
+seed = 42

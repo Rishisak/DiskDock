@@ -1,0 +1,13 @@
+receptor = protein/CDK1_receptor.pdbqt
+ligand = compound/flavopiridol.pdbqt
+
+center_x = 328.82935
+center_y = 213.26834
+center_z = 192.52827
+
+size_x = 20
+size_y = 20
+size_z = 20
+
+exhaustiveness = 16
+num_modes = 10

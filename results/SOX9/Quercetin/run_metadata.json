@@ -1,0 +1,18 @@
+{
+  "protein_name": "SOX9",
+  "compound_name": "Quercetin",
+  "protein_pdb": "C:\\Users\\rishi\\OneDrive\\Desktop\\DistDockNet\\protein\\cache\\4EUW.pdb",
+  "requested_chain_id": "A",
+  "selected_chain_id": "A",
+  "site_mode": "blind",
+  "box": {
+    "center_x": -16.45599913597107,
+    "center_y": -20.75550079345703,
+    "center_z": 13.989999055862427,
+    "size_x": 55.32999849319458,
+    "size_y": 33.163002014160156,
+    "size_z": 52.831998348236084
+  },
+  "binding_affinity": -6.149,
+  "vina_seed": 42
+}

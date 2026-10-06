@@ -1,0 +1,14 @@
+receptor = C:\Users\rishi\OneDrive\Desktop\DistDockNet\results\ui_runs\COX-2_PTGS2_\Apigenin\receptor.pdbqt
+ligand = C:\Users\rishi\OneDrive\Desktop\DistDockNet\results\ui_runs\COX-2_PTGS2_\Apigenin\ligand.pdbqt
+
+center_x = 37.59949803352356
+center_y = 27.250001430511475
+center_z = 238.302001953125
+
+size_x = 72.50899648666382
+size_y = 85.10200214385986
+size_z = 67.63800048828125
+
+exhaustiveness = 16
+num_modes = 10
+seed = 42

@@ -1,0 +1,18 @@
+{
+  "protein_name": "COL2A1",
+  "compound_name": "Curcumin",
+  "protein_pdb": "C:\\Users\\rishi\\OneDrive\\Desktop\\DistDockNet\\protein\\cache\\6JEC.pdb",
+  "requested_chain_id": "A",
+  "selected_chain_id": "A",
+  "site_mode": "blind",
+  "box": {
+    "center_x": 2.824000120162964,
+    "center_y": 59.145999908447266,
+    "center_z": -1.1389999389648438,
+    "size_x": 23.77199935913086,
+    "size_y": 80.8479995727539,
+    "size_z": 45.917999267578125
+  },
+  "binding_affinity": -3.363,
+  "vina_seed": 42
+}

@@ -1,0 +1,18 @@
+{
+  "protein_name": "SIRT1",
+  "compound_name": "Quercetin",
+  "protein_pdb": "C:\\Users\\rishi\\OneDrive\\Desktop\\DistDockNet\\protein\\cache\\4I5I.pdb",
+  "requested_chain_id": "A",
+  "selected_chain_id": "A",
+  "site_mode": "blind",
+  "box": {
+    "center_x": 42.819499015808105,
+    "center_y": -21.771499633789062,
+    "center_z": 22.172500491142273,
+    "size_x": 49.18499946594238,
+    "size_y": 76.40299987792969,
+    "size_z": 60.707000970840454
+  },
+  "binding_affinity": -9.294,
+  "vina_seed": 42
+}
