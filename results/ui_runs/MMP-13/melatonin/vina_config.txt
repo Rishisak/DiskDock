@@ -1,0 +1,14 @@
+receptor = C:\Users\rishi\OneDrive\Desktop\DistDockNet\results\ui_runs\MMP-13\melatonin\receptor.pdbqt
+ligand = C:\Users\rishi\OneDrive\Desktop\DistDockNet\results\ui_runs\MMP-13\melatonin\ligand.pdbqt
+
+center_x = 64.86400032043457
+center_y = -0.8824996948242188
+center_z = 14.157000064849854
+
+size_x = 61.82999801635742
+size_y = 50.617000579833984
+size_z = 54.89400005340576
+
+exhaustiveness = 16
+num_modes = 10
+seed = 42

@@ -1,0 +1,14 @@
+receptor = C:\Users\rishi\OneDrive\Desktop\DistDockNet\results\ui_runs\MMP-13\redocking_SP6\receptor.pdbqt
+ligand = C:\Users\rishi\OneDrive\Desktop\DistDockNet\results\ui_runs\MMP-13\redocking_SP6\reference_ligand.pdbqt
+
+center_x = 52.196998596191406
+center_y = 9.517500162124634
+center_z = 11.279500007629395
+
+size_x = 26.65399932861328
+size_y = 21.158999919891357
+size_z = 26.496999740600586
+
+exhaustiveness = 16
+num_modes = 10
+seed = 42
