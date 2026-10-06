@@ -23,42 +23,16 @@ from rdkit.Chem import AllChem
 from Bio.PDB import PDBParser, PDBIO, Select
 
 from meeko import MoleculePreparation, PDBQTWriterLegacy
-from database import initialize_database, create_working_pdb_file
+from database import (
+    initialize_database,
+    create_working_pdb_file,
+    save_docking_run,
+    get_docking_history,
+    get_docking_run,
+)
 
 
-def smiles_to_sdf(smiles, output_file):
-    print("\n[1] Converting SMILES to 3D structure...")
 
-    mol = Chem.MolFromSmiles(smiles)
-
-    if mol is None:
-        raise ValueError("Invalid SMILES string.")
-
-    print("SMILES parsed successfully.")
-
-    mol = Chem.AddHs(mol)
-
-    print("Generating 3D coordinates...")
-    result = AllChem.EmbedMolecule(mol, randomSeed=42)
-
-    if result != 0:
-        raise RuntimeError("Could not generate 3D coordinates for the compound.")
-
-    print("3D coordinates generated.")
-
-    print("Optimizing molecular geometry...")
-    result = AllChem.UFFOptimizeMolecule(mol)
-
-    if result != 0:
-        print("Warning: UFF optimization did not fully converge.")
-
-    writer = Chem.SDWriter(str(output_file))
-    writer.write(mol)
-    writer.close()
-
-    print("3D SDF saved:", output_file)
-
-    return output_file
 BASE_DIR = Path(__file__).resolve().parent
 VINA_EXE = BASE_DIR / "vina.exe"
 RESULTS_DIR = BASE_DIR / "results" / "ui_runs"
@@ -68,6 +42,29 @@ RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 # SQLite is the permanent protein store.
 initialize_database()
 
+
+def smiles_to_sdf(smiles, output_file):
+    """Convert a SMILES string into an optimized 3D SDF file."""
+    print("\n[1] Converting SMILES to 3D structure...")
+    mol = Chem.MolFromSmiles(smiles)
+    if mol is None:
+        raise ValueError("Invalid SMILES string.")
+
+    mol = Chem.AddHs(mol)
+    result = AllChem.EmbedMolecule(mol, randomSeed=42)
+    if result != 0:
+        raise RuntimeError("Could not generate 3D coordinates for the compound.")
+
+    result = AllChem.UFFOptimizeMolecule(mol)
+    if result != 0:
+        print("Warning: UFF optimization did not fully converge.")
+
+    output_file = Path(output_file)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+    writer = Chem.SDWriter(str(output_file))
+    writer.write(mol)
+    writer.close()
+    return output_file
 
 
 STANDARD_AMINO_ACIDS = {
@@ -1614,6 +1611,86 @@ def run_redocking_validation(
 
 
 
+def show_docking_history():
+    st.subheader("📜 Docking history")
+    st.caption("Permanent history stored in distdocknet.db.")
+
+    rows, columns = get_docking_history(limit=500)
+    if not rows:
+        st.info("No docking history yet. Run a docking job first.")
+        return
+
+    history_df = pd.DataFrame(rows, columns=columns)
+    display_df = history_df[[
+        "id", "created_at", "workflow", "protein_name", "pdb_id",
+        "compound_name", "reference_ligand", "binding_affinity",
+        "rmsd", "chain_id", "status"
+    ]].copy()
+    display_df = display_df.rename(columns={
+        "id": "Run ID", "created_at": "Date", "workflow": "Workflow",
+        "protein_name": "Protein", "pdb_id": "PDB",
+        "compound_name": "Compound", "reference_ligand": "Reference ligand",
+        "binding_affinity": "Affinity (kcal/mol)", "rmsd": "RMSD (Å)",
+        "chain_id": "Chain", "status": "Status",
+    })
+
+    st.dataframe(display_df, use_container_width=True, hide_index=True)
+    st.download_button(
+        "Download docking history CSV",
+        data=history_df.to_csv(index=False).encode("utf-8"),
+        file_name="distdocknet_docking_history.csv",
+        mime="text/csv",
+        key="download_docking_history",
+    )
+
+    st.divider()
+    st.subheader("View a previous run")
+    run_ids = history_df["id"].astype(int).tolist()
+    selected_run_id = st.selectbox("Select Run ID", run_ids, key="history_run_id")
+    selected = get_docking_run(selected_run_id)
+    if selected is None:
+        st.warning("The selected run could not be found.")
+        return
+
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        value = selected["binding_affinity"]
+        st.metric("Binding affinity", "—" if value is None else f"{value:.3f} kcal/mol")
+    with c2:
+        value = selected["rmsd"]
+        st.metric("RMSD", "—" if value is None else f"{value:.3f} Å")
+    with c3:
+        st.metric("Status", selected["status"])
+
+    detail_rows = [
+        ("Run ID", selected["id"]),
+        ("Date", selected["created_at"]),
+        ("Workflow", selected["workflow"]),
+        ("Protein", selected["protein_name"]),
+        ("PDB ID", selected["pdb_id"] or ""),
+        ("Compound", selected["compound_name"] or ""),
+        ("Reference ligand", selected["reference_ligand"] or ""),
+        ("Docking mode", selected["docking_mode"] or ""),
+        ("Chain", selected["chain_id"] or ""),
+        ("Exhaustiveness", selected["exhaustiveness"]),
+        ("Number of poses", selected["num_modes"]),
+        ("Matched atoms", selected["matched_atoms"]),
+        ("Error", selected["error_message"] or ""),
+        ("Docking output", selected["output_path"] or ""),
+        ("Protein file", selected["protein_path"] or ""),
+        ("Ligand file", selected["ligand_path"] or ""),
+        ("Receptor file", selected["receptor_path"] or ""),
+    ]
+    st.dataframe(
+        pd.DataFrame(detail_rows, columns=["Field", "Value"]),
+        use_container_width=True, hide_index=True
+    )
+
+    if selected.get("smiles"):
+        st.write("**SMILES:**")
+        st.code(selected["smiles"], language="text")
+
+
 st.set_page_config(
 
     page_title="DistDockNet",
@@ -1644,6 +1721,17 @@ if not VINA_EXE.exists():
     )
 
 
+
+st.sidebar.header("DistDockNet")
+app_view = st.sidebar.radio(
+    "View",
+    ["Run docking", "Docking history"],
+    key="app_view",
+)
+
+if app_view == "Docking history":
+    show_docking_history()
+    st.stop()
 
 st.sidebar.header("Docking settings")
 
@@ -1912,6 +2000,26 @@ if mode == "Redocking validation":
             st.write("**Docking box:**", result["box"])
 
 
+
+            save_docking_run(
+                workflow="Redocking validation",
+                protein_name=protein_name,
+                pdb_id=pdb_id.strip().upper(),
+                compound_name=reference_ligand.strip().upper(),
+                reference_ligand=reference_ligand.strip().upper(),
+                docking_mode="Reference ligand",
+                chain_id=result["selected_chain"],
+                exhaustiveness=exhaustiveness,
+                num_modes=num_modes,
+                binding_affinity=result["binding_affinity"],
+                rmsd=result["rmsd"],
+                matched_atoms=result["matched_atoms"],
+                status="SUCCESS",
+                output_path=result["predicted_output"],
+                protein_path=result["protein_pdb"],
+                ligand_path=result["reference_ligand_pdbqt"],
+                receptor_path=result["receptor_pdbqt"],
+            )
 
             st.session_state["redocking_result"] = result
 
@@ -2314,9 +2422,35 @@ else:
 
                 )
 
+                save_docking_run(
+                    workflow="Standard docking",
+                    protein_name=protein["name"],
+                    pdb_id=protein.get("pdb_id", "").strip().upper() or None,
+                    compound_name=compound["name"],
+                    smiles=compound["smiles"],
+                    docking_mode=(
+                        "Reference ligand"
+                        if site_mode == "Reference ligand"
+                        else "Blind docking"
+                    ),
+                    chain_id=result["selected_chain"],
+                    exhaustiveness=exhaustiveness,
+                    num_modes=num_modes,
+                    binding_affinity=result["binding_affinity"],
+                    status="SUCCESS",
+                    output_path=result["output"],
+                    protein_path=result["protein_pdb"],
+                    ligand_path=result["ligand_pdbqt"],
+                    receptor_path=str(
+                        Path(result["output"]).parent / "receptor.pdbqt"
+                    ),
+                )
+
 
 
             except Exception as exc:
+
+                error_message = str(exc)
 
                 results.append(
 
@@ -2332,10 +2466,28 @@ else:
 
                         "Docking output": "",
 
-                        "Error": str(exc),
+                        "Error": error_message,
 
                     }
 
+                )
+
+                save_docking_run(
+                    workflow="Standard docking",
+                    protein_name=protein["name"],
+                    pdb_id=protein.get("pdb_id", "").strip().upper() or None,
+                    compound_name=compound["name"],
+                    smiles=compound["smiles"],
+                    docking_mode=(
+                        "Reference ligand"
+                        if site_mode == "Reference ligand"
+                        else "Blind docking"
+                    ),
+                    chain_id=None,
+                    exhaustiveness=exhaustiveness,
+                    num_modes=num_modes,
+                    status="FAILED",
+                    error_message=error_message,
                 )
 
 
