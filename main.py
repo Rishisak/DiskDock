@@ -41,7 +41,7 @@ RESULT_MATRIX_FILE = (
 
 REQUIRED_COLUMNS = {
     "protein_name",
-    "protein_pdb",
+    "protein_pdb",d
     "compound_name",
     "smiles",
 }

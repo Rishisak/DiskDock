@@ -1,0 +1,15 @@
+receptor = C:\Users\rishi\OneDrive\Desktop\DistDockNet\results\ui_runs\STAT3\Quercetin\receptor.pdbqt
+ligand = C:\Users\rishi\OneDrive\Desktop\DistDockNet\results\ui_runs\STAT3\Quercetin\ligand.pdbqt
+
+center_x = -3.3729991912841797
+center_y = 18.83249855041504
+center_z = 25.64750099182129
+
+size_x = 84.5880012512207
+size_y = 123.37299728393555
+size_z = 97.39300155639648
+
+exhaustiveness = 16
+num_modes = 10
+
+seed = 42

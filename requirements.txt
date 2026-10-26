@@ -5,3 +5,7 @@ scipy
 rdkit
 biopython
 meeko
+py3Dmol
+networkx
+requests
+altair

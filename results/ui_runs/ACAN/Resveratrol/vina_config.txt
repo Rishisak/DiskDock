@@ -1,0 +1,15 @@
+receptor = C:\Users\rishi\OneDrive\Desktop\DistDockNet\results\ui_runs\ACAN\Resveratrol\receptor.pdbqt
+ligand = C:\Users\rishi\OneDrive\Desktop\DistDockNet\results\ui_runs\ACAN\Resveratrol\ligand.pdbqt
+
+center_x = 23.537999749183655
+center_y = -1.3245010375976562
+center_z = 5.503999710083008
+
+size_x = 63.453999280929565
+size_y = 82.72100067138672
+size_z = 54.08399963378906
+
+exhaustiveness = 16
+num_modes = 10
+
+seed = 42

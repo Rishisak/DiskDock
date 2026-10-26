@@ -1,0 +1,28 @@
+receptor = C:\Users\rishi\OneDrive\Desktop\DistDockNet\results\ui_runs\ADAMTS-5\Baicalein\receptor.pdbqt
+
+ligand = C:\Users\rishi\OneDrive\Desktop\DistDockNet\results\ui_runs\ADAMTS-5\Baicalein\ligand.pdbqt
+
+
+
+center_x = 15.85200023651123
+
+center_y = 4.027500152587891
+
+center_z = 0.5879993438720703
+
+
+
+size_x = 56.22400093078613
+
+size_y = 60.7869987487793
+
+size_z = 51.07600021362305
+
+
+
+exhaustiveness = 16
+
+num_modes = 10
+
+seed = 42
+
