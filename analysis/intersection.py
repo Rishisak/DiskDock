@@ -9,6 +9,8 @@ import pandas as pd
 import numpy as np
 import networkx as nx
 
+from analysis.ppi import normalize_target_to_gene
+
 
 def build_target_compound_network(
     docking_df: pd.DataFrame,
@@ -47,7 +49,7 @@ def build_target_compound_network(
     valid_hits = docking_df[docking_df[a_col] <= affinity_threshold].copy()
 
     for _, row in valid_hits.iterrows():
-        p_name = str(row[t_col]).strip().upper()
+        p_name = normalize_target_to_gene(row[t_col])
         c_name = str(row[c_col]).strip()
         aff = float(row[a_col])
 
@@ -116,7 +118,7 @@ def rank_compounds_by_polypharmacology(
         return pd.DataFrame()
 
     df = docking_df.copy()
-    df[t_col] = df[t_col].astype(str).str.strip().str.upper()
+    df[t_col] = df[t_col].apply(normalize_target_to_gene)
     df[c_col] = df[c_col].astype(str).str.strip()
     df[a_col] = pd.to_numeric(df[a_col], errors="coerce")
     df = df.dropna(subset=[a_col])
