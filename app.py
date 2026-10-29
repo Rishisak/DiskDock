@@ -2964,14 +2964,30 @@ st.sidebar.header(
     "Docking settings"
 )
 
+workflow_options = [
+    "Standard docking",
+    "🧬 Disease-Guided Automated Docking",
+    "Redocking validation",
+    "🌐 Step 12: PPI & Network Analysis",
+]
+
+if st.session_state.get("jump_to_step12"):
+    st.session_state["workflow_mode"] = "🌐 Step 12: PPI & Network Analysis"
+    st.session_state["jump_to_step12"] = False
+
+current_mode = st.session_state.get("workflow_mode", "Standard docking")
+default_idx = (
+    workflow_options.index(current_mode)
+    if current_mode in workflow_options
+    else 0
+)
+
 mode = st.sidebar.selectbox(
     "Workflow",
-    [
-        "Standard docking",
-        "Redocking validation",
-        "🌐 Step 12: PPI & Network Analysis",
-    ],
+    workflow_options,
+    index=default_idx,
 )
+st.session_state["workflow_mode"] = mode
 
 
 site_mode = "Blind docking"
@@ -3428,6 +3444,25 @@ if mode == "🌐 Step 12: PPI & Network Analysis":
                 st.info(
                     "Docking results are required for Target–Compound intersection analysis. Select 'Batch Docking Matrix' or 'Upload Custom Docking CSV' as your input data source above."
                 )
+
+
+# ============================================================
+# DISEASE-GUIDED AUTOMATED DOCKING WORKFLOW
+# ============================================================
+
+elif mode == "🧬 Disease-Guided Automated Docking":
+
+    from disease_docking_ui import render_disease_docking_workflow
+
+    render_disease_docking_workflow(
+        chain_id=chain_id,
+        exhaustiveness=exhaustiveness,
+        num_modes=num_modes,
+        vina_exe=VINA_EXE,
+        fetch_pdb_func=fetch_pdb,
+        run_standard_docking_func=run_standard_docking,
+        render_3d_viewer_func=_render_docking_3d_viewer,
+    )
 
 
 # ============================================================
